@@ -1,0 +1,40 @@
+# ==============================================================================
+# AEROVISTA — AI 3D Reconstruction & Digital Twin Pipeline Configuration
+# ==============================================================================
+
+mission:
+  name: "Single-Pass UAV Aerial Survey"
+  preset: "urban_recon"
+  target_fps: 5.0
+  max_keyframes: 200
+
+camera:
+  intrinsics_file: "data/input/camera.json"
+  auto_estimate_fov: true
+  default_fov_deg: 65.0
+
+processing:
+  voxel_size_meters: 0.15
+  use_hybrid_depth: true
+  use_gpu_acceleration: true
+  filter_dynamic_objects: true
+  dynamic_classes:
+    - "vehicle"
+    - "pedestrian"
+
+scale_registration:
+  mode: "GPS_LOCKED"
+  gps_telemetry_file: "data/input/gps.csv"
+  weight_by_accuracy: true
+
+meshing:
+  method: "poisson"
+  depth: 8
+  density_threshold: 0.05
+  apply_vertex_colors: true
+
+visualization:
+  theme: "dark_atmosphere"
+  default_color_mode: "RGB"
+  default_particle_size: 0.25
+  enable_fog: true
